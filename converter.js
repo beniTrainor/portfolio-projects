@@ -69,7 +69,7 @@ module.exports.convert_inline_code = function(string) {
     if (matches === null) {
         return string;
     }
-    
+
     matches.forEach(function (match) {
         const text = match.slice(1, -1);
         string = string.replace(match, `<code>${text}</code>`);
@@ -86,12 +86,10 @@ module.exports.convert_blockquotes = function(lines) {
     const blockquote_lines = [];
 
     lines.forEach(function (line) {
-        console.log({line});
-        
+
         if (line.startsWith("> ")) {
             is_blockquote_open = true;
             blockquote_lines.push(line.slice(2, ));
-            console.log({blockquote_lines})
         } else {
             if (is_blockquote_open) {
                 is_blockquote_open = false;
@@ -117,4 +115,45 @@ module.exports.convert_blockquotes = function(lines) {
 
     return converted_lines;
 
+}
+
+module.exports.convert_code_blocks = function(lines) {
+
+    const converted_lines = [];
+
+    let is_codeblock_open = false;
+    const codeblock_lines = [];
+
+    lines.forEach(function (line) {
+
+        if (line.startsWith("```")) {
+            if (is_codeblock_open) {
+                is_codeblock_open = false;
+
+                converted_lines.push("<code>");
+                converted_lines.push(...codeblock_lines);
+                converted_lines.push("</code>");
+
+                // Clear the queue
+                codeblock_lines.splice(0, codeblock_lines.length);
+
+            } else {
+                is_codeblock_open = true;
+            }
+        } else {
+            if (is_codeblock_open) {
+                codeblock_lines.push(line);
+            } else {
+                converted_lines.push(line);
+            }
+        }
+    });
+
+    if (codeblock_lines.length > 0) {
+        converted_lines.push("<code>");
+        converted_lines.push(...codeblock_lines);
+        converted_lines.push("</code>");
+    }
+
+    return converted_lines;
 }
