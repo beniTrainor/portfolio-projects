@@ -337,6 +337,32 @@ describe("Inline conversions", function () {
     });
 
 
+    describe("convert inline image links", function () {
+
+        it("should return the same string if it has no links", function () {
+            assert.equal(converter.convert_inline_image_links("string"), "string");
+        });
+
+        it("should convert a single inline image link", function() {
+
+            const original = "Inline-style: ![Markdown Here Logo](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png)";
+            const expected = "Inline-style: <img alt=\"Markdown Here Logo\" src=\"https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png\">";
+
+            assert.equal(converter.convert_inline_image_links(original), expected);
+        });
+
+        it("should convert multiple inline image links", function() {
+
+            const original = "![First image](https://example.com/image-1.png) ![Second image](https://example.com/image-2.png)";
+            const expected = "<img alt=\"First image\" src=\"https://example.com/image-1.png\"> <img alt=\"Second image\" src=\"https://example.com/image-2.png\">" ;
+
+            assert.equal(converter.convert_inline_image_links(original), expected);
+        });
+
+
+    });
+
+
     describe("convert emphasized text", function () {
 
         it("should return the same strings if it's not marked up as emphasis", function () {

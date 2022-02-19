@@ -29,6 +29,23 @@ module.exports.convert_links = function(string) {
     return string;
 }
 
+module.exports.convert_inline_image_links = function(string) {
+    const matches = string.match(/!\[[^\]]*\]\([^\)]*\)/g);
+    if (matches === null) {
+        return string;
+    }
+
+    matches.forEach(function (match) {
+        const alt_text = match.match("\\[.*\\]")[0].slice(1, -1);
+        const img_url = match.match("\\(.*\\)")[0].slice(1, -1);
+
+        string = string.replace(match, `<img alt="${alt_text}" src="${img_url}">`);
+    });
+
+    return string;
+
+}
+
 module.exports.convert_emphasis = function(string) {
 
     const matches = [];
