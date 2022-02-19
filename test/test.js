@@ -365,11 +365,11 @@ describe("Inline conversions", function () {
 
     describe("convert inline code", function () {
 
-        it("should not convert a line break if not well formatted", function () {
+        it("should not convert a inline code if not well formatted", function () {
             const original = "This should not be formatted";
             const expected = "This should not be formatted";
 
-            assert.equal(converter.convert_horizontal_rule(original), expected);
+            assert.equal(converter.convert_inline_code(original), expected);
         });
 
         it("should convert a single formatted code string", function() {
