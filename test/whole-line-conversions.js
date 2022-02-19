@@ -222,18 +222,18 @@ describe('Whole line conversions', function() {
                 "```"
             ];
             const expected = [
-                "<code>",
+                "<pre>",
                 "const age = 32",
                 "console.log(age);",
-                "</code>"
+                "</pre>"
             ];
 
             const result = converter.convert_code_blocks(original);
             const result_lines = result.join("\n");
 
             assert.equal(typeof original, typeof result);
-            assert.equal(result_lines.includes("<code>"), true);
-            assert.equal(result_lines.includes("</code>"), true);
+            assert.equal(result_lines.includes("<pre>"), true);
+            assert.equal(result_lines.includes("</pre>"), true);
             assert.equal(result_lines, expected.join("\n"));
         });
 
@@ -249,10 +249,10 @@ describe('Whole line conversions', function() {
             ];
             const expected = [
                 "The following lines should be formatted:",
-                "<code>",
+                "<pre>",
                 "const age = 32",
                 "console.log(age);",
-                "</code>",
+                "</pre>",
                 "But not this one."
             ];
 
@@ -260,8 +260,8 @@ describe('Whole line conversions', function() {
             const result_lines = result.join("\n");
 
             assert.equal(typeof original, typeof result);
-            assert.equal(result_lines.includes("<code>"), true);
-            assert.equal(result_lines.includes("</code>"), true);
+            assert.equal(result_lines.includes("<pre>"), true);
+            assert.equal(result_lines.includes("</pre>"), true);
             assert.equal(result_lines, expected.join("\n"));
         });
 
@@ -283,16 +283,16 @@ describe('Whole line conversions', function() {
             ];
             const expected = [
                 "First code block:",
-                "<code>",
+                "<pre>",
                 "const age = 32",
                 "console.log(age);",
-                "</code>",
+                "</pre>",
                 "Second code block:",
-                "<code>",
+                "<pre>",
                 "<div>",
                 "HTML snippet without specifying code block type.",
                 "</div>",
-                "</code>",
+                "</pre>",
                 "but not this one."
             ];
 
@@ -300,8 +300,8 @@ describe('Whole line conversions', function() {
             const result_lines = result.join("\n");
 
             assert.equal(typeof original, typeof result);
-            assert.equal(result_lines.includes("<code>"), true);
-            assert.equal(result_lines.includes("</code>"), true);
+            assert.equal(result_lines.includes("<pre>"), true);
+            assert.equal(result_lines.includes("</pre>"), true);
             assert.equal(result_lines, expected.join("\n"));
         });
 

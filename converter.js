@@ -151,9 +151,9 @@ const Converter = (function () {
                 if (is_codeblock_open) {
                     is_codeblock_open = false;
 
-                    converted_lines.push("<code>");
+                    converted_lines.push("<pre>");
                     converted_lines.push(...codeblock_lines);
-                    converted_lines.push("</code>");
+                    converted_lines.push("</pre>");
 
                     // Clear the queue
                     codeblock_lines.splice(0, codeblock_lines.length);
@@ -171,9 +171,9 @@ const Converter = (function () {
         });
 
         if (codeblock_lines.length > 0) {
-            converted_lines.push("<code>");
+            converted_lines.push("<pre>");
             converted_lines.push(...codeblock_lines);
-            converted_lines.push("</code>");
+            converted_lines.push("</pre>");
         }
 
         return converted_lines;
