@@ -1,0 +1,73 @@
+body {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+main > h1 {
+  font-size: 3rem;
+  text-align: center;
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+}
+
+#logos-container {
+  display: flex; 
+  justify-content: center;
+}
+
+#logos-container > img {
+  max-height: 10rem;
+}
+
+#markdown-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+#markdown-container > section {
+  display: flex;
+  flex-direction: column;
+}
+
+.img-logo {
+  width: 10rem;
+  align-self: center;
+  justify-self: center;
+  margin-bottom: 2rem;
+}
+
+#markdown-container > * {
+  margin-right: 2rem;
+  margin-top: 2rem;
+}
+
+#markdown-input,
+#markdown-output {
+  width: 40rem;
+  font-size: 1rem;
+}
+
+#markdown-output {
+  border: 1px solid black;
+  border-radius: 2px;
+  padding-left: 1rem;
+  height: 45rem;
+
+  overflow-y: scroll;
+}
+
+#markdown-input-container {
+  margin-top: 6rem;
+}
+
+#markdown-input {
+  padding: 1rem;
+}
+
+#markdown-input:focus {
+  border-color: #80bdff;
+  border-radius: 2px;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+}

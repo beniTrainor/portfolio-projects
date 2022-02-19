@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Markdown to HTML Converter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+
+    <main>
+      <div id="markdown-container">
+        <section id="markdown-input-container">
+
+        <img alt="Markdown Logo" src="markdown-logo.png" class="img-logo">
+        <textarea id="markdown-input" rows="36">
+The following markdown was copied from the [Markdown Here Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
+
+# H1
+## H2
+### H3
+#### H4
+##### H5
+###### H6
+
+Alternatively, for H1 and H2, an underline-ish style:
+
+Alt-H1
+======
+
+Alt-H2
+------
+
+Emphasis, aka italics, with *asterisks* or _underscores_.
+
+Strong emphasis, aka bold, with **asterisks** or __underscores__.
+
+Combined emphasis with **asterisks and _underscores_**.
+
+Strikethrough uses two tildes. ~~Scratch this.~~
+</textarea>
+          
+        </section>
+
+
+        <section>
+          <img alt="HTML Logo" src="html-logo.png" class="img-logo">
+          <div id="markdown-output"> </div>
+        </section>
+
+    </main>
+
+
+    <script src="app.js"></script>
+  </body>
+
+</html>

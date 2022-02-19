@@ -1,0 +1,14 @@
+{
+  "name": "markdown-converter",
+  "version": "0.1.0",
+  "description": "A markdown converter",
+  "main": "converter.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^9.2.0"
+  }
+}
