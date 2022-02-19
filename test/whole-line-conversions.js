@@ -67,17 +67,89 @@ describe('Whole line conversions', function() {
     describe("convert a horizontal rule", function () {
 
         it("should not convert a horizontal rule if not well formatted", function () {
-            const original = "-*- This not should be formatted";
-            const expected = "-*- This not should be formatted";
+            const original = [
+                "-*- This should not be formatted",
+                "Another line"
+            ];
+            const expected = [
+                "-*- This should not be formatted",
+                "Another line"
+            ];
 
-            assert.equal(converter.convert_horizontal_rule(original), expected);
+            const result = converter.convert_horizontal_rule(original);
+            const result_lines = result.join("\n");
+
+            assert.equal(typeof result, typeof expected);
+            assert.equal(result_lines, expected.join("\n"));
         });
 
-        it("should convert a horizontal rule if formatted correctly", function () {
-            const original = "---";
-            const expected = "<hr>";
+        it("should convert a horizontal rule if formatted correctly with `-`", function () {
+            const original = [
+                "The following horizontal rule should be formatted",
+                "",
+                "---",
+                "",
+                "Some more text here"
+            ];
+            const expected = [
+                "The following horizontal rule should be formatted",
+                "",
+                "<hr>",
+                "",
+                "Some more text here"
+            ];
 
-            assert.equal(converter.convert_horizontal_rule(original), expected);
+            const result = converter.convert_horizontal_rule(original);
+            const result_lines = result.join("\n");
+
+            assert.equal(typeof result, typeof expected);
+            assert.equal(result_lines, expected.join("\n"));
+        });
+
+        it("should convert a horizontal rule if formatted correctly with `_`", function () {
+            const original = [
+                "The following horizontal rule should be formatted",
+                "",
+                "___",
+                "",
+                "Some more text here"
+            ];
+            const expected = [
+                "The following horizontal rule should be formatted",
+                "",
+                "<hr>",
+                "",
+                "Some more text here"
+            ];
+
+            const result = converter.convert_horizontal_rule(original);
+            const result_lines = result.join("\n");
+
+            assert.equal(typeof result, typeof expected);
+            assert.equal(result_lines, expected.join("\n"));
+        });
+
+        it("should convert a horizontal rule if formatted correctly with `*`", function () {
+            const original = [
+                "The following horizontal rule should be formatted",
+                "",
+                "***",
+                "",
+                "Some more text here"
+            ];
+            const expected = [
+                "The following horizontal rule should be formatted",
+                "",
+                "<hr>",
+                "",
+                "Some more text here"
+            ];
+
+            const result = converter.convert_horizontal_rule(original);
+            const result_lines = result.join("\n");
+
+            assert.equal(typeof result, typeof expected);
+            assert.equal(result_lines, expected.join("\n"));
         });
 
     });

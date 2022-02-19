@@ -77,12 +77,29 @@ const Converter = (function () {
     }
 
 
-    converter.convert_horizontal_rule = function(string) {
-        const match = string.match(/^---$/);
-        if (match === null) {
-            return string;
+    converter.convert_horizontal_rule = function(lines) {
+
+        if (lines.length < 3) {
+            return lines;
         }
-        return "<hr>";
+
+        const converted_lines = [lines[0]];
+
+        for (let i = 1; i < lines.length; i +=1) {
+            const [prev, curr, next] = lines.slice(i - 1, i + 2);
+            const is_curr_horizontal_rule = (
+                /^-{3,}$/.test(curr) ||
+                /^_{3,}$/.test(curr) ||
+                /^\*{3,}$/.test(curr)
+            );
+            if (prev == "" && is_curr_horizontal_rule && next == "") {
+                converted_lines.push("<hr>");
+            } else {
+                converted_lines.push(curr);
+            }
+        }
+
+        return converted_lines;
     }
 
     converter.convert_inline_code = function(string) {
