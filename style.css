@@ -9,15 +9,6 @@ main > h1 {
   margin-bottom: 2rem;
 }
 
-#logos-container {
-  display: flex; 
-  justify-content: center;
-}
-
-#logos-container > img {
-  max-height: 10rem;
-}
-
 #markdown-container {
   display: flex;
   justify-content: center;
