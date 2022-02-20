@@ -31,7 +31,7 @@ main > h1 {
 }
 
 .img-logo {
-  width: 10rem;
+  width: 7rem;
   align-self: center;
   justify-self: center;
   margin-bottom: 2rem;
@@ -58,7 +58,7 @@ main > h1 {
 }
 
 #markdown-input-container {
-  margin-top: 6rem;
+  margin-top: 5rem;
 }
 
 #markdown-input {
