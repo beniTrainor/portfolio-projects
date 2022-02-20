@@ -46,6 +46,7 @@ function convert(text) {
         if (line === "" || ! line.match(/^<.+>/)) {
             line = `<p>${line}</p>`;
         }
+        line = converter.convert_bold(line);
         line = converter.convert_emphasis(line);
         line = converter.convert_inline_code(line);
         line = converter.convert_inline_image_links(line);

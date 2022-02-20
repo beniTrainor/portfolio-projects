@@ -55,11 +55,38 @@ describe("Inline conversions", function () {
     });
 
 
+    describe("convert bolded text", function () {
+
+        it("should return the same strings if it's not marked up as bold", function () {
+            const original = "These words should not be bolded.";
+            const expected = "These words should not be bolded.";
+
+            assert.equal(converter.convert_bold(original), expected);
+        });
+
+        it("should convert a string marked up using '**'", function () {
+            const original = "**These words** should be bolded.";
+            const expected = "<strong>These words</strong> should be bolded.";
+
+            assert.equal(converter.convert_bold(original), expected);
+        });
+
+        it("should convert a string marked up using '__'", function () {
+            const original = "__These words__ should be bolded.";
+            const expected = "<strong>These words</strong> should be bolded.";
+
+            assert.equal(converter.convert_bold(original), expected);
+        });
+
+    });
+
+
+
     describe("convert emphasized text", function () {
 
         it("should return the same strings if it's not marked up as emphasis", function () {
-            const original = "These words should be emphasized.";
-            const expected = "These words should be emphasized.";
+            const original = "These words should not be emphasized.";
+            const expected = "These words should not be emphasized.";
 
             assert.equal(converter.convert_emphasis(original), expected);
         });

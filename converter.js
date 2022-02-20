@@ -50,6 +50,32 @@ const Converter = (function () {
 
     }
 
+    converter.convert_bold = function(string) {
+
+        const matches = [];
+
+        const asterisk_matches = string.match(/\*\*[^\*]*\*\*/g);
+        if (asterisk_matches !== null) {
+            matches.push(...asterisk_matches);
+        }
+
+        const underscore_matches = string.match(/__[^_]*__/g);
+        if (underscore_matches !== null) {
+            matches.push(...underscore_matches);
+        }
+
+        if (matches.length === 0) {
+            return string;
+        }
+
+        matches.forEach(function (match) {
+            const text = match.slice(2, -2);
+            string = string.replace(match, `<strong>${text}</strong>`);
+        });
+
+        return string;
+    }
+
     converter.convert_emphasis = function(string) {
 
         const matches = [];
