@@ -236,6 +236,55 @@ const Converter = (function () {
     }
 
 
+    converter.convert_ordered_lists = function (lines) {
+
+        const converted_lines = [];
+
+        let has_ordered_list_started = false;
+        const list_lines = [];
+
+        lines.forEach(function (line) {
+
+            const matches = line.match(/[0-9]+\.\s/);
+            if (matches !== null) {
+                has_ordered_list_started = true;
+                list_lines.push(line.slice(matches[0].length, ));
+            } else {
+                if (has_ordered_list_started) {
+
+                    let list_string = "<ol>\n";
+                    list_lines.forEach(function (line) {
+                        list_string += `<li>${line}</li>\n`;
+                    });
+                    list_string += "</ol>\n";
+
+                    converted_lines.push(list_string);
+
+                    // Clear the queue
+                    list_lines.splice(0, converted_lines.length);
+
+                    has_ordered_list_started = false;
+                } else {
+                    converted_lines.push(line);
+                }
+            }
+
+        });
+
+        if (list_lines.length > 0) {
+            let list_string = "<ol>\n";
+            list_lines.forEach(function (line) {
+                list_string += `<li>${line}</li>\n`;
+            });
+            list_string += "</ol>\n";
+
+            converted_lines.push(list_string);
+        }
+
+        return converted_lines;
+    }
+
+
     return Object.freeze(converter);
 }());
 

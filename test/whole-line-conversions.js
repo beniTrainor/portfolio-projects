@@ -377,6 +377,99 @@ describe('Whole line conversions', function() {
             assert.equal(result_lines, expected.join("\n"));
         });
 
+    });
+
+    describe("convert an ordered list", function () {
+
+        it("should convert an ordered list if well formatted", function () {
+            const original = [
+                "1. First item",
+                "2. Second item",
+            ];
+            const expected = [
+                "<ol>",
+                "<li>First item</li>",
+                "<li>Second item</li>",
+                "</ol>",
+            ];
+
+            const result = converter.convert_ordered_lists(original);
+            const result_lines = result.join("\n");
+
+            assert.equal(typeof original, typeof result);
+            assert.equal(result_lines.includes("<ol>"), true);
+            assert.equal(result_lines.includes("</ol>"), true);
+            assert.equal(result_lines, expected.join("\n") + "\n");
+        });
+
+        it("should convert an ordered list with space above and below", function () {
+            const original = [
+                "Some text here",
+                "",
+                "1. First item",
+                "2. Second item",
+                "",
+                "Some more text here"
+            ];
+            const expected = [
+                "Some text here",
+                "",
+                "<ol>",
+                "<li>First item</li>",
+                "<li>Second item</li>",
+                "</ol>",
+                "",
+                "Some more text here"
+            ];
+
+            const result = converter.convert_ordered_lists(original);
+            const result_lines = result.join("\n");
+
+            assert.equal(typeof original, typeof result);
+            assert.equal(result_lines.includes("<ol>"), true);
+            assert.equal(result_lines.includes("</ol>"), true);
+            assert.equal(result_lines, expected.join("\n"));
+        });
+
+        it("should convert multiple ordered lists", function () {
+            const original = [
+                "First ordered list:",
+                "",
+                "1. First item of the first list",
+                "2. Second item of the first list",
+                "",
+                "Second ordered list:",
+                "",
+                "1. First item of the second list",
+                "2. Second item of the second list",
+                ""
+            ];
+            const expected = [
+                "First ordered list:",
+                "",
+                "<ol>",
+                "<li>First item of the first list</li>",
+                "<li>Second item of the first list</li>",
+                "</ol>",
+                "",
+                "Second ordered list:",
+                "",
+                "<ol>",
+                "<li>First item of the second list</li>",
+                "<li>Second item of the second list</li>",
+                "</ol>",
+                ""
+            ];
+
+            const result = converter.convert_ordered_lists(original);
+            const result_lines = result.join("\n");
+
+            assert.equal(typeof original, typeof result);
+            assert.equal(result_lines.includes("<ol>"), true);
+            assert.equal(result_lines.includes("</ol>"), true);
+            assert.equal(result_lines, expected.join("\n"));
+        });
+
 
     });
 
