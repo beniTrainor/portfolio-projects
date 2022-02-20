@@ -131,9 +131,10 @@ const Converter = (function () {
             } else {
                 if (is_blockquote_open) {
                     is_blockquote_open = false;
-                    converted_lines.push("<blockquote>");
-                    converted_lines.push(...blockquote_lines);
-                    converted_lines.push("</blockquote>");
+                    converted_lines.push([
+                        "<blockquote>",
+                        ...blockquote_lines,
+                        "</blockquote>"].join("\n"));
 
                     // Clear the queue
                     blockquote_lines.splice(0, blockquote_lines.length);
@@ -146,9 +147,10 @@ const Converter = (function () {
         });
 
         if (blockquote_lines.length > 0) {
-            converted_lines.push("<blockquote>");
-            converted_lines.push(...blockquote_lines);
-            converted_lines.push("</blockquote>");
+            converted_lines.push([
+                "<blockquote>",
+                ...blockquote_lines,
+                "</blockquote>"].join("\n"));
         }
 
         return converted_lines;
@@ -168,9 +170,7 @@ const Converter = (function () {
                 if (is_codeblock_open) {
                     is_codeblock_open = false;
 
-                    converted_lines.push("<pre>");
-                    converted_lines.push(...codeblock_lines);
-                    converted_lines.push("</pre>");
+                    converted_lines.push(["<pre>", ...codeblock_lines, "</pre>"].join("\n"));
 
                     // Clear the queue
                     codeblock_lines.splice(0, codeblock_lines.length);
@@ -188,9 +188,7 @@ const Converter = (function () {
         });
 
         if (codeblock_lines.length > 0) {
-            converted_lines.push("<pre>");
-            converted_lines.push(...codeblock_lines);
-            converted_lines.push("</pre>");
+            converted_lines.push(["<pre>", ...codeblock_lines, "</pre>"].join("\n"));
         }
 
         return converted_lines;
