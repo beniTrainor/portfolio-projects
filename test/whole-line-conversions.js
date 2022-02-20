@@ -473,4 +473,114 @@ describe('Whole line conversions', function() {
 
     });
 
+
+    describe("convert an unordered list", function () {
+
+        it("should convert an unordered list if well formatted", function () {
+            const original = [
+                "* First item",
+                "* Second item",
+            ];
+            const expected = [
+                "<ul>",
+                "<li>First item</li>",
+                "<li>Second item</li>",
+                "</ul>",
+            ];
+
+            const result = converter.convert_unordered_lists(original);
+            const result_lines = result.join("\n");
+
+            assert.equal(typeof original, typeof result);
+            assert.equal(result_lines.includes("<ul>"), true);
+            assert.equal(result_lines.includes("</ul>"), true);
+            assert.equal(result_lines, expected.join("\n"));
+        });
+
+        it("should convert an unordered list with space above and below", function () {
+            const original = [
+                "Some text here",
+                "",
+                "* First item",
+                "* Second item",
+                "",
+                "And some more text here",
+            ];
+            const expected = [
+                "Some text here",
+                "",
+                "<ul>",
+                "<li>First item</li>",
+                "<li>Second item</li>",
+                "</ul>",
+                "",
+                "And some more text here"
+            ];
+
+            const result = converter.convert_unordered_lists(original);
+            const result_lines = result.join("\n");
+
+            assert.equal(typeof original, typeof result);
+            assert.equal(result_lines.includes("<ul>"), true);
+            assert.equal(result_lines.includes("</ul>"), true);
+            assert.equal(result_lines, expected.join("\n"));
+        });
+
+
+        it("should convert unordered lists with different formatting symbols", function () {
+            const original = [
+                "* First item of first list",
+                "- First item of second list",
+            ];
+            const expected = [
+                "<ul>",
+                "<li>First item of first list</li>",
+                "</ul>",
+                "<ul>",
+                "<li>First item of second list</li>",
+                "</ul>"
+            ];
+
+            const result = converter.convert_unordered_lists(original);
+            const result_lines = result.join("\n");
+
+            assert.equal(typeof original, typeof result);
+            assert.equal(result_lines.includes("<ul>"), true);
+            assert.equal(result_lines.includes("</ul>"), true);
+            assert.equal(result_lines, expected.join("\n"));
+        });
+
+        it("should convert multiple unordered lists", function () {
+            const original = [
+                "First unordered list:",
+                "* First item of first list",
+                "* Second item of first list",
+                "Second unordered list:",
+                "- First item of second list",
+                "- Second item of second list"
+            ];
+            const expected = [
+                "First unordered list:",
+                "<ul>",
+                "<li>First item of first list</li>",
+                "<li>Second item of first list</li>",
+                "</ul>",
+                "Second unordered list:",
+                "<ul>",
+                "<li>First item of second list</li>",
+                "<li>Second item of second list</li>",
+                "</ul>",
+            ];
+
+            const result = converter.convert_unordered_lists(original);
+            const result_lines = result.join("\n");
+
+            assert.equal(typeof original, typeof result);
+            assert.equal(result_lines.includes("<ul>"), true);
+            assert.equal(result_lines.includes("</ul>"), true);
+            assert.equal(result_lines, expected.join("\n"));
+        });
+
+    });
+
 });

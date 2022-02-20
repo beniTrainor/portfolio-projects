@@ -1,5 +1,12 @@
 (function () {
 
+const debug_console_log = function (...args) {
+    const DEBUG = true; 
+    if (DEBUG) {
+        console.log(...args);
+    }
+}
+
 const Converter = (function () {
 
     const converter = {};
@@ -238,6 +245,8 @@ const Converter = (function () {
 
     converter.convert_ordered_lists = function (lines) {
 
+// TODO: remove trailining new line characters from "</ol>". Not necessary
+
         const converted_lines = [];
 
         let has_ordered_list_started = false;
@@ -283,6 +292,86 @@ const Converter = (function () {
 
         return converted_lines;
     }
+
+
+    converter.convert_unordered_lists = function (lines) {
+
+        const converted_lines = [];
+
+        let has_unordered_list_started = false;
+        let last_list_symbol = "";
+        const list_lines = [];
+
+        lines.forEach(function (line) {
+
+            debug_console_log({line});
+
+            let matched_symbol = "";
+            if (line.match(/^\*\s/)) {
+                matched_symbol = "*";
+            } else if (line.match(/^-\s/)) {
+                matched_symbol = "-";
+            } else if (line.match(/^\+\s/)) {
+                matched_symbol = "+";
+            }
+            debug_console_log({matched_symbol});
+
+            if (matched_symbol === "") {
+                if (has_unordered_list_started) {
+                    let list_string = "<ul>\n";
+                    list_lines.forEach(function (line) {
+                        list_string += `<li>${line}</li>\n`;
+                    });
+                    list_string += "</ul>";
+
+                    converted_lines.push(list_string);
+
+                    // Clear the queue
+                    list_lines.splice(0, converted_lines.length);
+
+                    has_unordered_list_started = false;
+                    last_list_symbol = "";
+                }
+                converted_lines.push(line);
+
+                return line;
+            } else if (matched_symbol === last_list_symbol){
+                list_lines.push(line.slice(2, ));
+            } else {
+                if (has_unordered_list_started) {
+                    let list_string = "<ul>\n";
+                    list_lines.forEach(function (line) {
+                        list_string += `<li>${line}</li>\n`;
+                    });
+                    list_string += "</ul>";
+
+                    converted_lines.push(list_string);
+
+                    // Clear the queue
+                    list_lines.splice(0, converted_lines.length);
+                } else {
+                    has_unordered_list_started = true;
+                }
+                last_list_symbol = matched_symbol;
+                list_lines.push(line.slice(2, ));
+            }
+
+        });
+
+
+        if (list_lines.length > 0) {
+            let list_string = "<ul>\n";
+            list_lines.forEach(function (line) {
+                list_string += `<li>${line}</li>\n`;
+            });
+            list_string += "</ul>";
+
+            converted_lines.push(list_string);
+        }
+
+        return converted_lines;
+    }
+
 
 
     return Object.freeze(converter);

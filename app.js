@@ -41,6 +41,7 @@ function convert(text) {
     lines = converter.convert_code_blocks(lines);
     lines = converter.convert_horizontal_rule(lines);
     lines = converter.convert_ordered_lists(lines);
+    lines = converter.convert_unordered_lists(lines);
 
     lines = lines.map(function (line) {
         line = converter.convert_heading(line);
