@@ -245,8 +245,6 @@ const Converter = (function () {
 
     converter.convert_ordered_lists = function (lines) {
 
-// TODO: remove trailining new line characters from "</ol>". Not necessary
-
         const converted_lines = [];
 
         let has_ordered_list_started = false;
@@ -304,8 +302,6 @@ const Converter = (function () {
 
         lines.forEach(function (line) {
 
-            debug_console_log({line});
-
             let matched_symbol = "";
             if (line.match(/^\*\s/)) {
                 matched_symbol = "*";
@@ -314,7 +310,6 @@ const Converter = (function () {
             } else if (line.match(/^\+\s/)) {
                 matched_symbol = "+";
             }
-            debug_console_log({matched_symbol});
 
             if (matched_symbol === "") {
                 if (has_unordered_list_started) {
