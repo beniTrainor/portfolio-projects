@@ -22,12 +22,10 @@ markdown_input.addEventListener("keyup", function (evt) {
 function convert_input() {
 
     const converted_text = convert(markdown_input.value);
-    console.log(converted_text);
+
     const parser = new DOMParser("text/html");
     const parsed_html = parser.parseFromString(converted_text, "text/html").body;
-    console.log(parsed_html);
-//     console.log(parsed_html.innerText);
-//     console.log([...parsed_html.children]);
+
     Array.from(parsed_html.children).forEach(function (node) {
         markdown_output.appendChild(node);
     });
@@ -37,21 +35,25 @@ function convert_input() {
 
 function convert(text) {
 
-    text = converter.convert_blockquotes(text.split("\n")).join("\n");
-    text = converter.convert_code_blocks(text.split("\n")).join("\n");
-    text = converter.convert_horizontal_rule(text.split("\n")).join("\n");
-//     text = converter.convert_headings(text);
-//     text = converter.convert_paragraphs(text);
+    let lines = text.split("\n");
 
+    lines = converter.convert_blockquotes(lines);
+    lines = converter.convert_code_blocks(lines);
+    lines = converter.convert_horizontal_rule(lines);
 
-    text = text.split("\n").map(function (line) {
-//         console.log({line});
+    lines = lines.map(function (line) {
+        line = converter.convert_heading(line);
+        if (line === "" || ! line.match(/^<.+>/)) {
+            line = `<p>${line}</p>`;
+        }
         line = converter.convert_emphasis(line);
         line = converter.convert_inline_code(line);
         line = converter.convert_inline_image_links(line);
         line = converter.convert_links(line);
         return line;
-    }).join("\n");
+    });
 
-    return text;
+    console.log({lines});
+
+    return lines.join("\n");
 }
