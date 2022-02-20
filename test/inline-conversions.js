@@ -107,6 +107,25 @@ describe("Inline conversions", function () {
 
     });
 
+    describe("convert strikethroughed text", function () {
+
+        it("should return the same strings if it's not marked up as strikethrough", function () {
+            const original = "These words should not be strikethroughed.";
+            const expected = "These words should not be strikethroughed.";
+
+            assert.equal(converter.convert_strikethrough(original), expected);
+        });
+
+        it("should convert a string marked up using '~~'", function () {
+            const original = "~~These words~~ should be strikethroughed.";
+            const expected = "<strike>These words</strike> should be strikethroughed.";
+
+            assert.equal(converter.convert_strikethrough(original), expected);
+        });
+
+    });
+
+
 
     describe("convert inline code", function () {
 

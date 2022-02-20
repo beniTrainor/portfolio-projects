@@ -48,6 +48,7 @@ function convert(text) {
         }
         line = converter.convert_bold(line);
         line = converter.convert_emphasis(line);
+        line = converter.convert_strikethrough(line);
         line = converter.convert_inline_code(line);
         line = converter.convert_inline_image_links(line);
         line = converter.convert_links(line);

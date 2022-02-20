@@ -102,6 +102,21 @@ const Converter = (function () {
         return string;
     }
 
+    converter.convert_strikethrough = function(string) {
+
+        const matches = string.match(/~~[^~]+~~/g);
+        if (matches === null) {
+            return string;
+        }
+
+        matches.forEach(function (match) {
+            const text = match.slice(2, -2);
+            string = string.replace(match, `<strike>${text}</strike>`);
+        });
+
+        return string;
+    }
+
 
     converter.convert_horizontal_rule = function(lines) {
 
