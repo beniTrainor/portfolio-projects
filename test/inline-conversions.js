@@ -107,6 +107,20 @@ describe("Inline conversions", function () {
 
     });
 
+    describe("convert bolded and emphasized text", function () {
+
+        it("should convert a bolded and emphasized string", function () {
+            const original = "Combined emphasis with **asterisks and _underscores_**.";
+            const expected = "Combined emphasis with <strong>asterisks and <em>underscores</em></strong>.";
+
+            let result = converter.convert_bold(original);
+            result = converter.convert_emphasis(result);
+
+            assert.equal(result, expected);
+        });
+
+    })
+
     describe("convert strikethroughed text", function () {
 
         it("should return the same strings if it's not marked up as strikethrough", function () {
