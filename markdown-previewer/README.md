@@ -3,8 +3,8 @@
 A [simple web application to preview Markdown text](https://htmlpreview.github.io/?https://github.com/beniTrainor/portfolio-projects/blob/master/markdown-previewer/index.html) on large or medium sized screens (not on mobile devices).
 
 I developed this project from scratch to practice the following:
-- [Test-driven development](#test-driven-development)
 - [Algorithmic/problem-solving skills](#algorithmic-problem-solving-skills)
+- [Test-driven development](#test-driven-development)
 - [FlexBox](#flexbox)
 - [Semantic HTML5](#semantic-html5)
 
