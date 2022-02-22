@@ -1,12 +1,5 @@
 (function () {
 
-const debug_console_log = function (...args) {
-    const DEBUG = true; 
-    if (DEBUG) {
-        console.log(...args);
-    }
-}
-
 const Converter = (function () {
 
     const converter = {};

@@ -57,7 +57,5 @@ function convert(text) {
         return line;
     });
 
-    console.log({lines});
-
     return lines.join("\n");
 }
