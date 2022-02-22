@@ -21,7 +21,7 @@ The actual conversion of Markdown into HTML is done entirely in string format. O
 
 Every function that I've used to convert Markdown into HTML has been accompanied by a set of tests which I have written following the test-driven methodology somewhat strictly. I first wrote the tests for the function and then the actual function until the tests passed. This has allowed me to be sure each function produced the output I required before I used it on the main app. 
 
-For this project, I've used a library called [Mocha.js](https://mochajs.org/) to write the tests for each function. They are located in the `tests` directory.
+For this project, I've used a library called [Mocha.js](https://mochajs.org/) to write the tests for each function. They are located in the `test` directory.
 
 ## FlexBox
 
