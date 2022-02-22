@@ -2,35 +2,29 @@ body {
   font-family: Helvetica, Arial, sans-serif;
 }
 
-main > h1 {
-  font-size: 3rem;
-  text-align: center;
-  margin-top: 4rem;
-  margin-bottom: 2rem;
-}
-
-#markdown-container {
+main {
   display: flex;
   justify-content: center;
   align-items: flex-start;
   flex-wrap: wrap;
 }
 
-#markdown-container > section {
+main > section {
   display: flex;
   flex-direction: column;
+  margin-right: 2rem;
+  margin-top: 2rem;
 }
 
-.img-logo {
+.section-logo {
   width: 7rem;
   align-self: center;
   justify-self: center;
   margin-bottom: 2rem;
 }
 
-#markdown-container > * {
-  margin-right: 2rem;
-  margin-top: 2rem;
+#markdown-input-container {
+  margin-top: 5rem;
 }
 
 #markdown-input,
@@ -48,10 +42,6 @@ main > h1 {
   overflow-y: scroll;
 }
 
-#markdown-input-container {
-  margin-top: 5rem;
-}
-
 #markdown-input {
   padding: 1rem;
 }
@@ -62,6 +52,9 @@ main > h1 {
   outline: 0;
   box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
 }
+
+
+/* Some generic styling for the rendered Markdown output */
 
 pre {
   background-color: #f1f0f0;
