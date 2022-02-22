@@ -1,7 +1,7 @@
 {
-  "name": "markdown-converter",
+  "name": "markdown-previewer",
   "version": "0.1.0",
-  "description": "A markdown converter",
+  "description": "A markdown previewer",
   "main": "converter.js",
   "scripts": {
     "test": "mocha"
