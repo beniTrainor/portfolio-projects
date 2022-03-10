@@ -1,19 +1,24 @@
 (function () {
 // Beginning of IIFE
 
+
 // DOM references
 // =============================================================================
 const slide_title = document.querySelector("#slide-title");
 const random_image = document.querySelector("#img-random");
 // =============================================================================
 
+
 // Global Settings
+// =============================================================================
 const INTERVAL_DURATION_IN_SECONDS = 2;
 let interval;
-let last_used_image_file;
-let last_used_title;
 let is_interval_running = false;
+let last_used_image_file = "";
+let last_used_title_text = "";
+let last_used_google_font = "";
 // =============================================================================
+
 
 // Utility functions
 // =============================================================================
@@ -143,11 +148,29 @@ function set_slideshow_interval() {
 
     return setInterval(function () {
 
-        const text = random_choice(slide_texts);
-        slide_title.innerText = text;
-        slide_title.style.fontFamily = random_choice(google_fonts);
+        let selected_title_text = random_choice(slide_texts);
+        while (selected_title_text === last_used_title_text) {
+            selected_title_text = random_choice(slide_texts);
+        }
+        last_used_title_text = selected_title_text;
 
-        random_image.src = "./slide-images/" + random_choice(slide_image_files);
+        slide_title.innerText = selected_title_text;
+
+        let selected_google_font = random_choice(google_fonts);
+        while (selected_google_font === last_used_google_font) {
+            selected_google_font = random_choice(google_fonts);
+        }
+        last_used_google_font = selected_google_font;
+        console.log({selected_google_font});
+        slide_title.style.fontFamily = selected_google_font;
+
+        let selected_image_file = random_choice(slide_image_files);
+        while (selected_image_file === last_used_image_file) {
+            selected_image_file = random_choice(slide_image_files);
+        }
+        last_used_image_file = selected_image_file;
+
+        random_image.src = "./slide-images/" + selected_image_file;
 
         const degrees = random_int_from_range(0, 360);
         const color = random_color();
